@@ -12,6 +12,4 @@ Read the Tutorial - https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-
 
 
 ## Notes:
-I have been working with hibernate for quite some time and I’ve realized that the best way to model a one-to-many relationship is to use just @ManyToOne annotation on the child entity.
-
-
+The idea with bidirectional one-to-many association is to allow you to keep a collection of child entities in the parent, and enable you to persist and retrieve the child entities via the parent entity. This is made possible via Hibernate’s entity state transitions and dirty checking mechanism.

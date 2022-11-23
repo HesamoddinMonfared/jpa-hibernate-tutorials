@@ -49,8 +49,8 @@ public class UserProfile implements Serializable {
     @Size(max = 32)
     private String zipCode;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     public UserProfile() {

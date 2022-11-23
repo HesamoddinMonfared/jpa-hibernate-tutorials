@@ -24,6 +24,8 @@ public class JpaOneToOneDemoApplication implements CommandLineRunner {
 		SpringApplication.run(JpaOneToOneDemoApplication.class, args);
 	}
 
+
+
 	@Override
 	public void run(String... args) throws Exception {
 		// Clean up database tables

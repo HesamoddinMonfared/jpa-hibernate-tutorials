@@ -35,4 +35,9 @@ public class Post extends AuditModel {
     @NotNull
     @Lob
     private String content;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "post")
+    private Set<Comment> comments = new HashSet<>();
 }

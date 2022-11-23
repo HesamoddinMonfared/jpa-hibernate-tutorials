@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.Calendar;
+import java.util.Optional;
+import java.util.Set;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -34,31 +36,44 @@ public class JpaOneToManyDemoApplication implements CommandLineRunner {
 		postRepository.deleteAllInBatch();
 
 		example_1();
+		example_2();
 	}
 
-	private void example_1(){
+	private void example_1() {
 		//=========================================
 
-		// Create a Post instance
+		// Create a Post
 		Post post = new Post();
-		post.setContent("Content_1");
-		post.setTitle("Title_1");
-		post.setDescription("Description_1");
+		post.setTitle("post title");
+		post.setDescription("post description");
+		post.setContent("post content");
 
+		// Create Comments
+		Comment comment1 = new Comment();
+		comment1.setText("Great Post!");
+		comment1.setPost(post);
+		Comment comment2 = new Comment();
+		comment2.setText("Really helpful Post. Thanks a lot!");
+		comment2.setPost(post);
 
-		// Create a Comment instance
-		Comment comment_1 = new Comment();
-		comment_1.setText("Text_1");
-		comment_1.setPost(post);
+		// Add comments in the Post
+		post.getComments().add(comment1);
+		post.getComments().add(comment2);
 
-		Comment comment_2= new Comment();
-		comment_2.setText("Text_2");
-		comment_2.setPost(post);
-
+		// Save Post and Comments via the Post entity
 		postRepository.save(post);
-		commentRepository.save(comment_1);
-		commentRepository.save(comment_2);
 
 		//=========================================
+	}
+
+	private void example_2() {
+		// Retrieve Post
+		Long postId = 1L;
+		Optional<Post> post = postRepository.findById(postId);
+
+		// Get all the comments
+		Set<Comment> comments;
+		if (post.isPresent())
+			comments = post.get().getComments();
 	}
 }
